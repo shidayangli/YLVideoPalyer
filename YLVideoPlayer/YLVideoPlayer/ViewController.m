@@ -12,6 +12,7 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, strong) AVPlayerItem *currentItem;
 
 @end
 
@@ -24,21 +25,21 @@ static const NSString *PlayerItemStatusContext;
     
     NSURL *url = [NSURL URLWithString:@"http://data.vod.itc.cn/?pt=3&pg=1&prod=ad&new=/71/198/ScvYTiKRSIqfZUzXnK99bE.mp4"];
     AVAsset *asset = [AVAsset assetWithURL:url];
-    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
-    self.player = [AVPlayer playerWithPlayerItem:playerItem];
+    self.currentItem = [AVPlayerItem playerItemWithAsset:asset];
+    self.player = [AVPlayer playerWithPlayerItem:self.currentItem];
     AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     playerLayer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width * 9 / 16);
     [self.view.layer addSublayer:playerLayer];
-    [self.player addObserver:self forKeyPath:@"status" options:0 context:&PlayerItemStatusContext];
+    [self.currentItem addObserver:self forKeyPath:@"status" options:0 context:&PlayerItemStatusContext];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if (context == &PlayerItemStatusContext) {
         if ([keyPath isEqualToString:@"status"]) {
-            AVPlayer *player = (AVPlayer *)object;
-            if (player) {
-                if (player.status == AVPlayerItemStatusReadyToPlay) {
-                    [player play];
+            AVPlayerItem *currentPlayerItem = (AVPlayerItem *)object;
+            if (currentPlayerItem) {
+                if (currentPlayerItem.status == AVPlayerItemStatusReadyToPlay) {
+                    [self.player play];
                 }
             }
         }
@@ -46,7 +47,7 @@ static const NSString *PlayerItemStatusContext;
 }
 
 - (void)dealloc {
-    [self.player removeObserver:self forKeyPath:@"status"];
+    [self.currentItem removeObserver:self forKeyPath:@"status"];
 }
 
 
