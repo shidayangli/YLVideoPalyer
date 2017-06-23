@@ -34,6 +34,10 @@ static const NSString *PlayerItemStatusContext;
 
 - (void)dealloc {
     [self.currentItem removeObserver:self forKeyPath:@"status"];
+    if (self.timeObserver) {
+        [self.player removeTimeObserver:self];
+        self.timeObserver = nil;
+    }
 }
 
 #pragma mark - private methods
