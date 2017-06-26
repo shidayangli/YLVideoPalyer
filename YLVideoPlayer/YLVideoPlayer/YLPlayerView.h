@@ -6,7 +6,7 @@
 //  Copyright © 2017年 yangli. All rights reserved.
 //
 
-@class AVPlayer, AVPlayerItem;
+@class AVPlayer, AVPlayerItem, AVQueuePlayer;
 
 #import <UIKit/UIKit.h>
 #import <CoreMedia/CMTime.h>
@@ -16,8 +16,10 @@ typedef void(^TimePeriodBlock)(CMTime time);
 @interface YLPlayerView : UIView
 
 @property (nonatomic, strong, readonly) AVPlayer *player;
-@property (nonatomic, strong, readonly) AVPlayerItem *currentItem;
+@property (nonatomic, strong, readonly) AVQueuePlayer *queuePlayer;
 
 - (instancetype)initWithFrame:(CGRect)frame videoURLString:(NSString *)urlString timePeriodBlock:(TimePeriodBlock)block;
+- (instancetype)initWithFrame:(CGRect)frame videoURLStringArray:(NSArray *)urlStringArray timePeriodBlock:(TimePeriodBlock)block;
+- (NSInteger)getTotalSeconds;
 
 @end
