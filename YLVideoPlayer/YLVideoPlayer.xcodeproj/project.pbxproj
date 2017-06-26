@@ -15,6 +15,7 @@
 		8FF46F381EFCEFF500833600 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FF46F361EFCEFF500833600 /* LaunchScreen.storyboard */; };
 		8FF46F431EFCEFF500833600 /* YLVideoPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF46F421EFCEFF500833600 /* YLVideoPlayerTests.m */; };
 		8FF46F4E1EFCEFF500833600 /* YLVideoPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF46F4D1EFCEFF500833600 /* YLVideoPlayerUITests.m */; };
+		8FF46F601F00B6DD00833600 /* YLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF46F5F1F00B6DD00833600 /* YLPlayerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		8FF46F491EFCEFF500833600 /* YLVideoPlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YLVideoPlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF46F4D1EFCEFF500833600 /* YLVideoPlayerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLVideoPlayerUITests.m; sourceTree = "<group>"; };
 		8FF46F4F1EFCEFF500833600 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8FF46F5E1F00B6DD00833600 /* YLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLPlayerView.h; sourceTree = "<group>"; };
+		8FF46F5F1F00B6DD00833600 /* YLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLPlayerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				8FF46F2C1EFCEFF500833600 /* AppDelegate.m */,
 				8FF46F2E1EFCEFF500833600 /* ViewController.h */,
 				8FF46F2F1EFCEFF500833600 /* ViewController.m */,
+				8FF46F5E1F00B6DD00833600 /* YLPlayerView.h */,
+				8FF46F5F1F00B6DD00833600 /* YLPlayerView.m */,
 				8FF46F311EFCEFF500833600 /* Main.storyboard */,
 				8FF46F341EFCEFF500833600 /* Assets.xcassets */,
 				8FF46F361EFCEFF500833600 /* LaunchScreen.storyboard */,
@@ -278,6 +283,7 @@
 			files = (
 				8FF46F301EFCEFF500833600 /* ViewController.m in Sources */,
 				8FF46F2D1EFCEFF500833600 /* AppDelegate.m in Sources */,
+				8FF46F601F00B6DD00833600 /* YLPlayerView.m in Sources */,
 				8FF46F2A1EFCEFF500833600 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

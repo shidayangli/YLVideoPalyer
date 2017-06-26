@@ -7,17 +7,16 @@
 //
 
 #import "ViewController.h"
+#import "YLPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
 
 static const NSString *PlayerItemStatusContext;
 
 @interface ViewController ()
 
-@property (nonatomic, strong) AVPlayer *player;
-@property (nonatomic, strong) AVPlayerItem *currentItem;
+@property (nonatomic, strong) YLPlayerView *playerView;
 @property (nonatomic, strong) UILabel *countDownLabel;
 @property (nonatomic, assign) NSInteger totalSeconds;
-@property (nonatomic, strong) id timeObserver;
 
 @end
 
@@ -27,48 +26,39 @@ static const NSString *PlayerItemStatusContext;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setUpAVPlayer];
+    [self setUpPlayerView];
+    [self setUpKVO];
     [self setUpUI];
-    [self addPlayerItemTimeObserver];
 }
 
 - (void)dealloc {
-    [self.currentItem removeObserver:self forKeyPath:@"status"];
-    if (self.timeObserver) {
-        [self.player removeTimeObserver:self];
-        self.timeObserver = nil;
-    }
+    [self.playerView.currentItem removeObserver:self forKeyPath:@"status"];
 }
 
 #pragma mark - private methods
-- (void)setUpAVPlayer {
+- (void)setUpPlayerView {
     NSString *urlString = @"http://data.vod.itc.cn/?pt=3&pg=1&prod=ad&new=/71/198/ScvYTiKRSIqfZUzXnK99bE.mp4";
-    NSURL *url = [NSURL URLWithString:urlString];
     
-    AVAsset *asset = [AVAsset assetWithURL:url];
-    self.currentItem = [AVPlayerItem playerItemWithAsset:asset];
-    self.player = [AVPlayer playerWithPlayerItem:self.currentItem];
-    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-    playerLayer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width * 9 / 16);
-    [self.view.layer addSublayer:playerLayer];
-    
-    [self.currentItem addObserver:self
-                       forKeyPath:@"status"
-                          options:0
-                          context:&PlayerItemStatusContext];
-}
-
-- (void)addPlayerItemTimeObserver {
     __weak typeof(self) weakSelf = self;
-    self.timeObserver = [self.player
-                         addPeriodicTimeObserverForInterval:CMTimeMake(1, 1)
-                         queue:dispatch_get_main_queue()
-                         usingBlock:^(CMTime time) {
+    TimePeriodBlock block = ^(CMTime time) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         NSInteger currentSeconds = CMTimeGetSeconds(time);
         NSString *countDownLabelText = [NSString stringWithFormat:@"%ld", (self.totalSeconds - currentSeconds)];
         strongSelf.countDownLabel.text = countDownLabelText;
-    }];
+    };
+    
+    CGRect playerViewRect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width * 9 / 16);
+    self.playerView = [[YLPlayerView alloc] initWithFrame:playerViewRect
+                                           videoURLString:urlString
+                                          timePeriodBlock:block];
+    [self.view addSubview:self.playerView];
+}
+
+- (void)setUpKVO {
+    [self.playerView.currentItem addObserver:self
+                                  forKeyPath:@"status"
+                                     options:0
+                                     context:&PlayerItemStatusContext];
 }
 
 - (void)setUpUI {
@@ -90,7 +80,7 @@ static const NSString *PlayerItemStatusContext;
                 if (currentPlayerItem.status == AVPlayerItemStatusReadyToPlay) {
                     self.totalSeconds = (NSInteger)CMTimeGetSeconds(currentPlayerItem.duration);
                     self.countDownLabel.text = [NSString stringWithFormat:@"%ld", (long)self.totalSeconds];
-                    [self.player play];
+                    [self.playerView.player play];
                 }
             }
         }
