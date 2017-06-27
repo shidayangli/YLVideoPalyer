@@ -9,17 +9,20 @@
 @class AVPlayer, AVPlayerItem, AVQueuePlayer;
 
 #import <UIKit/UIKit.h>
-#import <CoreMedia/CMTime.h>
 
-typedef void(^TimePeriodBlock)(CMTime time);
+#import "YLVideoPlayerDefinitions.h"
 
 @interface YLPlayerView : UIView
 
-@property (nonatomic, strong, readonly) AVPlayer *player;
-@property (nonatomic, strong, readonly) AVQueuePlayer *queuePlayer;
+@property (nonatomic, readonly, strong) AVPlayer *player;
+@property (nonatomic, readonly, strong) AVQueuePlayer *queuePlayer;
 
-- (instancetype)initWithFrame:(CGRect)frame videoURLString:(NSString *)urlString timePeriodBlock:(TimePeriodBlock)block;
-- (instancetype)initWithFrame:(CGRect)frame videoURLStringArray:(NSArray *)urlStringArray timePeriodBlock:(TimePeriodBlock)block;
+- (instancetype)initWithFrame:(CGRect)frame
+               videoURLString:(NSString *)urlString
+              timePeriodBlock:(TimePeriodBlock)block;
+
+- (instancetype)initWithFrame:(CGRect)frame videoURLStringArray:(NSArray *)urlStringArray;
+
 - (NSInteger)getTotalSeconds;
 
 @end

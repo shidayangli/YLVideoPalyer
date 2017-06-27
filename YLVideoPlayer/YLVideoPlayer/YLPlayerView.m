@@ -6,8 +6,9 @@
 //  Copyright © 2017年 yangli. All rights reserved.
 //
 
-#import "YLPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
+
+#import "YLPlayerView.h"
 
 @interface YLPlayerView ()
 
@@ -45,26 +46,16 @@
     if (self) {
         self.timePeriodBlock = block;
         [self setUpAVPlayerWithVideoURLString:urlString];
-        [self addPlayerItemTimeObserver];
     }
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame videoURLStringArray:(NSArray *)urlStringArray timePeriodBlock:(TimePeriodBlock)block {
+- (instancetype)initWithFrame:(CGRect)frame videoURLStringArray:(NSArray *)urlStringArray {
     self = [super initWithFrame:frame];
     if (self) {
-        self.timePeriodBlock = block;
         [self setUpAVPlayerWithVideoURLStringArray:urlStringArray];
-        [self addPlayerItemTimeObserver];
     }
     return self;
-}
-
-- (void)dealloc {
-    if (self.timeObserver) {
-        [self.player removeTimeObserver:self];
-        self.timeObserver = nil;
-    }
 }
 
 #pragma mark - private methods
@@ -86,13 +77,6 @@
     AVPlayerItem *currentItem = [AVPlayerItem playerItemWithAsset:asset];
     self.player = [AVPlayer playerWithPlayerItem:currentItem];
     [(AVPlayerLayer *)self.layer setPlayer:self.player];
-}
-
-- (void)addPlayerItemTimeObserver {
-    self.timeObserver = [self.queuePlayer
-                         addPeriodicTimeObserverForInterval:CMTimeMake(1, 1)
-                         queue:dispatch_get_main_queue()
-                         usingBlock:self.timePeriodBlock];
 }
 
 @end

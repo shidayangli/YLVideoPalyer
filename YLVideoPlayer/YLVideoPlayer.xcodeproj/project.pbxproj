@@ -16,6 +16,7 @@
 		8FF46F431EFCEFF500833600 /* YLVideoPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF46F421EFCEFF500833600 /* YLVideoPlayerTests.m */; };
 		8FF46F4E1EFCEFF500833600 /* YLVideoPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF46F4D1EFCEFF500833600 /* YLVideoPlayerUITests.m */; };
 		8FF46F601F00B6DD00833600 /* YLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF46F5F1F00B6DD00833600 /* YLPlayerView.m */; };
+		8FF46F691F023DBA00833600 /* YLPlayerMutiplePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF46F681F023DBA00833600 /* YLPlayerMutiplePresenter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,9 @@
 		8FF46F4F1EFCEFF500833600 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8FF46F5E1F00B6DD00833600 /* YLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLPlayerView.h; sourceTree = "<group>"; };
 		8FF46F5F1F00B6DD00833600 /* YLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLPlayerView.m; sourceTree = "<group>"; };
+		8FF46F671F023DBA00833600 /* YLPlayerMutiplePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLPlayerMutiplePresenter.h; sourceTree = "<group>"; };
+		8FF46F681F023DBA00833600 /* YLPlayerMutiplePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLPlayerMutiplePresenter.m; sourceTree = "<group>"; };
+		8FF46F6A1F023F1100833600 /* YLVideoPlayerDefinitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLVideoPlayerDefinitions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,9 @@
 				8FF46F2F1EFCEFF500833600 /* ViewController.m */,
 				8FF46F5E1F00B6DD00833600 /* YLPlayerView.h */,
 				8FF46F5F1F00B6DD00833600 /* YLPlayerView.m */,
+				8FF46F671F023DBA00833600 /* YLPlayerMutiplePresenter.h */,
+				8FF46F681F023DBA00833600 /* YLPlayerMutiplePresenter.m */,
+				8FF46F6A1F023F1100833600 /* YLVideoPlayerDefinitions.h */,
 				8FF46F311EFCEFF500833600 /* Main.storyboard */,
 				8FF46F341EFCEFF500833600 /* Assets.xcassets */,
 				8FF46F361EFCEFF500833600 /* LaunchScreen.storyboard */,
@@ -283,6 +290,7 @@
 			files = (
 				8FF46F301EFCEFF500833600 /* ViewController.m in Sources */,
 				8FF46F2D1EFCEFF500833600 /* AppDelegate.m in Sources */,
+				8FF46F691F023DBA00833600 /* YLPlayerMutiplePresenter.m in Sources */,
 				8FF46F601F00B6DD00833600 /* YLPlayerView.m in Sources */,
 				8FF46F2A1EFCEFF500833600 /* main.m in Sources */,
 			);
