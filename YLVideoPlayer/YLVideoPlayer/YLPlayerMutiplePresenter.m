@@ -8,8 +8,8 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#import "YLPlayerMutiplePresenter.h"
 #import "YLPlayerView.h"
+#import "YLPlayerMutiplePresenter.h"
 
 static const NSString *PlayerMutiplePresenterPlayerItemStatusContext;
 
@@ -24,6 +24,7 @@ static const NSString *PlayerMutiplePresenterPlayerItemStatusContext;
 
 @implementation YLPlayerMutiplePresenter
 
+#pragma mark - life cycle
 - (instancetype)initWithFrame:(CGRect)frame
           videoURLStringArray:(NSArray *)urlStringArray
               timePeriodBlock:(TimePeriodBlock)block
@@ -47,12 +48,14 @@ static const NSString *PlayerMutiplePresenterPlayerItemStatusContext;
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     if (self.timeObserver) {
         [self.playerView.queuePlayer removeTimeObserver:self.timeObserver];
         self.timeObserver = nil;
     }
 }
 
+#pragma mark - private method
 - (void)addPlayerItemTimeObserver {
     _timeObserver = [_playerView.queuePlayer addPeriodicTimeObserverForInterval:CMTimeMake(1, 1)
                                                                           queue:dispatch_get_main_queue()
@@ -84,6 +87,11 @@ static const NSString *PlayerMutiplePresenterPlayerItemStatusContext;
     return 0;
 }
 
+- (void)removeKVO {
+    [self.playerView.queuePlayer removeObserver:self forKeyPath:@"status"];
+}
+
+#pragma mark - KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if (context != &PlayerMutiplePresenterPlayerItemStatusContext) {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -103,6 +111,7 @@ static const NSString *PlayerMutiplePresenterPlayerItemStatusContext;
     }
 }
 
+#pragma mark - event handler
 - (void)moviePlayDidEnd:(NSNotification *)notification {
     if (!self.playerView.queuePlayer.items || self.playerView.queuePlayer.items.count <= 0) {
         return;

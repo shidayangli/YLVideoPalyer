@@ -12,13 +12,20 @@
 #define YLVideoPlayerDefinitions_h
 
 typedef void(^TimePeriodBlock)(CMTime time);
-@class YLPlayerMutiplePresenter;
+@class YLPlayerMutiplePresenter, YLPlayerSinglePresenter;
 
 @protocol YLPlayerMutiplePresenterDelegate <NSObject>
 
 @optional
 - (void)playerWillPlay:(YLPlayerMutiplePresenter *)presenter totalDuration:(NSInteger)duration;
 - (void)playerDidEndOneVideo:(YLPlayerMutiplePresenter *)presenter currentDuration:(NSInteger)duration;
+
+@end
+
+@protocol YLPlayerSinglePresenterDelegate <NSObject>
+
+@optional
+- (void)playerWillPlay:(YLPlayerSinglePresenter *)presenter duration:(NSInteger)duration;
 
 @end
 

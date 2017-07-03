@@ -17,9 +17,7 @@
 @property (nonatomic, readonly, strong) AVPlayer *player;
 @property (nonatomic, readonly, strong) AVQueuePlayer *queuePlayer;
 
-- (instancetype)initWithFrame:(CGRect)frame
-               videoURLString:(NSString *)urlString
-              timePeriodBlock:(TimePeriodBlock)block;
+- (instancetype)initWithFrame:(CGRect)frame videoURLString:(NSString *)urlString;
 
 - (instancetype)initWithFrame:(CGRect)frame videoURLStringArray:(NSArray *)urlStringArray;
 

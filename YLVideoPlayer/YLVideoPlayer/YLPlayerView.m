@@ -15,7 +15,6 @@
 @property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) AVQueuePlayer *queuePlayer;
 @property (nonatomic, strong) id timeObserver;
-@property (nonatomic, copy) TimePeriodBlock timePeriodBlock;
 
 @end
 
@@ -41,10 +40,9 @@
 }
 
 #pragma mark - life cycle
-- (instancetype)initWithFrame:(CGRect)frame videoURLString:(NSString *)urlString timePeriodBlock:(TimePeriodBlock)block {
+- (instancetype)initWithFrame:(CGRect)frame videoURLString:(NSString *)urlString {
     self = [super initWithFrame:frame];
     if (self) {
-        self.timePeriodBlock = block;
         [self setUpAVPlayerWithVideoURLString:urlString];
     }
     return self;
